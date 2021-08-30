@@ -3,7 +3,7 @@ import React from "react"
 import{ Container } from './styles'
 
 export function GuildIcon() {
-  const uri = 'https://icon-library.com/images/discord-icon-color/discord-icon-color-23.jpg'
+  const uri = 'https://pbs.twimg.com/profile_images/1392925163969200136/wNZYmQXx_400x400.jpg'
 
   return (
     <Container

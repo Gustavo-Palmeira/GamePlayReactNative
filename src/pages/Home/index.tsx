@@ -23,12 +23,16 @@ export function Home() {
     navigation.navigate('AppointmentDetails')
   }
 
+  function handleAppointmentCreate() {
+    navigation.navigate('AppointmentCreate')
+  }
+
   return (
     <Background>
       <Container>
         <Header>
           <Profile />
-          <ButtonAdd />
+          <ButtonAdd onPress={handleAppointmentCreate} />
         </Header>
         <CategorySelect 
           categorySelected={category}
