@@ -9,11 +9,25 @@ import { GuildIcon } from '../../components/GuildIcon'
 import { InputSmall } from '../../components/InputSmall'
 import { TextArea } from '../../components/TextArea'
 import { Button } from '../../components/Button'
+import { Modal } from '../../components/Modal'
+import Guilds from '../Guilds'
+import { GuildProps } from '../../components/Guild'
 
 import { Container, CategoryLabel, Label, Form, Select, SelectImage, SelectBody, ArrowIcon, Field, FieldContent, Column, Divider, LabelBox, TextLimit, Submit } from './styles'
 
 export function AppointmentCreate() {
   const [category, setCategory] = useState('')
+  const [openGuildsModal, setOpenGuildsModal] = useState(false)
+  const [guild, setGuild] = useState<GuildProps>({} as GuildProps)
+
+  const handleGuildsModal = () => {
+    setOpenGuildsModal(!openGuildsModal)
+  }
+
+  const handleGuildSelect = (guildSelect: GuildProps) => {
+    setGuild(guildSelect)
+    setOpenGuildsModal(!openGuildsModal)
+  }
 
   return (
     <Background>
@@ -32,13 +46,13 @@ export function AppointmentCreate() {
             />
 
             <Form>
-              <RectButton>
+              <RectButton onPress={handleGuildsModal}>
                 <Select>
                   <SelectImage>
-                    <GuildIcon />
+                    {guild.icon && <GuildIcon />}
                   </SelectImage>
                   <SelectBody>
-                    <Label>Selecione um servidor</Label>
+                    <Label>{guild.name ? guild.name : 'Selecione um servidor'}</Label>
                   </SelectBody>
                   <ArrowIcon />
                 </Select>
@@ -80,6 +94,10 @@ export function AppointmentCreate() {
             </Form>
           </Container>
         </ScrollView>
+
+        <Modal visible={openGuildsModal}>
+          <Guilds handleGuildSelect={handleGuildSelect}/>
+        </Modal>
       </KeyboardAvoidingView>
     </Background>
   )
